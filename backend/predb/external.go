@@ -9,7 +9,6 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"net/http"
 	"net/url"
 	"strings"
 	"time"
@@ -59,12 +58,12 @@ func getExternalData(ctx context.Context, rlsName string) (*PreDBEntry, error) {
 
 	if err != nil {
 		// sleep and retry if we reach the rate limit
-		if resp.StatusCode == http.StatusTooManyRequests {
-			time.Sleep(time.Second * 10)
-			return getExternalData(ctx, rlsName)
-		}
+		// if resp.StatusCode == http.StatusTooManyRequests {
+		time.Sleep(time.Second * 10)
+		return getExternalData(ctx, rlsName)
+		// }
 
-		return nil, err
+		// return nil, err
 	}
 
 	defer resp.Body.Close()
