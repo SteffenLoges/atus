@@ -89,6 +89,15 @@ ATUS relies on [predb.ovh](https://predb.ovh/) ([GitHub](https://github.com/pred
   _An api endpoint to delete releases is planned but currently not possible due to the way [atus-tracker-api](https://github.com/SteffenLoges/atus-tracker-api)'s authentication is implemented._
 - If you delete a release from the fileserver while its downloading, it will be stuck in the "Downloading" state forever and ATUS will keep spamming the fileserver with status requests. To fix this, manually delete the release from ATUS through the web interface.
 
+## Common Errors
+
+- **meta file _xxx_ is not processed**<br>
+  ATUS can't download the meta file from the fileserver. This is either because the fileserver is down, the file was deleted or your webserver has no read access to the file.
+
+- **This torrent is for registered users only** or similar errors while adding a source rss feed<br>
+  The tracker requires authentication. If the tracker offers a way to costimize the rss feed, make sure to select something like "direkt download".
+  If the tracker doesn't offer this, you can add the trackers cookies during the rss feed setup. You can find the cookies in your browser's developer tools.
+
 ## Tech Stack
 
 **Frontend:** Vue 3, Vuetify 3
