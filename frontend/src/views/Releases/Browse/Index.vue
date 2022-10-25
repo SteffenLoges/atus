@@ -16,7 +16,7 @@
       <SlideDownTransition>
         <v-alert variant="tonal" color="primary" type="info" class="mb-4" v-if="sumNewReleases > 0">
           There are {{ sumNewReleases }} new releases.
-          <v-btn variant="text" size="small" @click="resetFilters()">Show them</v-btn>
+          <v-btn variant="text" size="small" @click="showNewReleases()">Show them</v-btn>
         </v-alert>
       </SlideDownTransition>
 
@@ -67,23 +67,24 @@ export default defineComponent({
     //   - Replace the whole new releases counter with eventhanders in this component / composable
     onBeforeMount(() => globalStore.resetSumNewReleases())
 
-    const defaultFilters = {
+    const filters = ref<{ [key in IFilterName]: any }>({
       name: "",
       page: 1,
       perPage: 10,
       category: "all",
       state: "all"
-    };
-
-    const filters = ref<{ [key in IFilterName]: any }>(defaultFilters);
-
-    const resetFilters = () => {
-      filters.value = defaultFilters;
-    };
+    });
 
     const setFilter = (name: IFilterName, value: any) => {
       filters.value.page = 1; // reset page on filter change
       filters.value[name] = value;
+    };
+
+    const showNewReleases = () => {
+      globalStore.resetSumNewReleases()
+      setFilter("state", "all")
+      setFilter("category", "all")
+      setFilter("name", "")
     };
 
     const pages = computed(() => Math.ceil(count.value / (filters.value.perPage as number)))
@@ -122,7 +123,7 @@ export default defineComponent({
       filters,
       pages,
       setFilter,
-      resetFilters,
+      showNewReleases,
       sumNewReleases,
     };
   },
