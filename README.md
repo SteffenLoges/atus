@@ -87,7 +87,10 @@ ATUS relies on [predb.ovh](https://predb.ovh/) ([GitHub](https://github.com/pred
 
 - ATUS will never delete releases and related files on its own even if you delete them from the fileserver / tracker. <br>
   _An api endpoint to delete releases is planned but currently not possible due to the way [atus-tracker-api](https://github.com/SteffenLoges/atus-tracker-api)'s authentication is implemented._
+
 - If you delete a release from the fileserver while its downloading, it will be stuck in the "Downloading" state forever and ATUS will keep spamming the fileserver with status requests. To fix this, manually delete the release from ATUS through the web interface.
+
+- If you stop a source, ATUS will still process previously received releases from that source. This makes it look like the source is still running even though it's not.
 
 ## Common Errors
 
