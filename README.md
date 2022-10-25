@@ -96,7 +96,8 @@ ATUS relies on [predb.ovh](https://predb.ovh/) ([GitHub](https://github.com/pred
 
 - **This torrent is for registered users only** or similar errors while adding a source rss feed<br>
   The tracker requires authentication. If the tracker offers a way to costimize the rss feed, make sure to select something like "direkt download".
-  If the tracker doesn't offer this, you can add the trackers cookies during the rss feed setup. You can find the cookies in your browser's developer tools.
+  If the tracker doesn't offer this, you can add the trackers cookies during the rss feed setup. You can find the cookies in your browser's developer tools.<br>
+  <img src="screenshots/source-add-with-cookies-example.jpg" height="100" />  <img src="screenshots/source-cookies-example.jpg" height="100" />
 
 ## Tech Stack
 
