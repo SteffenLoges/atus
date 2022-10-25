@@ -1,0 +1,80 @@
+@use "vuetify/styles";
+
+.v-table {
+  background-color: transparent !important;
+}
+
+a {
+  color: lightblue;
+}
+
+.v-overlay__scrim {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  opacity: 1;
+}
+
+.v-tooltip .v-overlay__content {
+  background: rgba(darken(#1c212e, 8%), 0.7) !important;
+  backdrop-filter: blur(4px) !important;
+  color: #ccc !important;
+  opacity: 1 !important;
+  outline: 1px solid rgba(#1c212e, 0.7);
+}
+
+.v-main,
+.v-main__wrap {
+  background-color: #131722 !important;
+}
+
+// toast
+.mosha__toast {
+  &.default .mosha__toast__content,
+  .mosha__toast__content {
+    font-family: inherit;
+    color: #ccc;
+  }
+
+  .mosha__toast__content__text {
+    letter-spacing: 0.0333333333em;
+    font-weight: 500;
+  }
+
+  .mosha__toast__content__description {
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  backdrop-filter: blur(2px);
+  &.success {
+    background-color: rgba(26, 145, 113, 0.9);
+  }
+
+  &.warning {
+    background-color: rgba(121, 119, 4, 0.6);
+    .mosha__toast__content {
+      color: #eee;
+    }
+  }
+
+  &.info {
+    background-color: rgba(23, 54, 94, 0.85);
+  }
+
+  &.danger {
+    background-color: rgba(197, 48, 82, 0.8);
+  }
+
+  &.default {
+    background-color: rgba(34, 39, 44, 0.7);
+  }
+
+  .mosha__toast__progress {
+    height: 5px;
+    background-image: linear-gradient(-225deg, #69eacb 0, #eaccf8 48%, #6654f1 100%);
+  }
+
+  .mosha__icon {
+    margin-right: 10px;
+  }
+}

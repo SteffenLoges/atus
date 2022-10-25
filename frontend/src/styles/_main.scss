@@ -1,0 +1,60 @@
+@use "./variables" as *;
+@import "mosha-vue-toastify/dist/style";
+
+code {
+  position: relative;
+  background: rgba(56, 55, 114, 0.65);
+  padding: 2px 5px;
+  overflow: hidden;
+  border-radius: 4px;
+
+  &.select-all {
+    user-select: all;
+  }
+
+  &[data-method] {
+    padding: 7px 10px 7px 60px;
+
+    &:after {
+      content: attr(data-method);
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.54);
+      color: #fff;
+      height: 100%;
+      border-radius: 4px 0 0 4px;
+      font-size: 0.8em;
+      width: 50px;
+    }
+  }
+}
+
+.card-accent {
+  border-color: $accent-outline-color;
+  background-color: $accent-color !important;
+}
+
+.cursor {
+  &-pointer {
+    cursor: pointer;
+  }
+}
+
+.icon-spinner {
+  animation: spin-animation 1.5s infinite;
+  display: inline-block;
+}
+
+@keyframes spin-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}

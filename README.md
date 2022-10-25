@@ -1,0 +1,100 @@
+<p align="center">
+  <img src="frontend/src/assets/images/logo-big.png" width="170" /><br>
+  <img src="frontend/src/assets/images/logo-text.png" />
+</p>
+
+<h2 align="center">ATUS - Automatic Torrent Upload Script</h2>
+
+Automatically downloads scene-releases from rss feeds and uploads them to your own tracker.
+
+## Features
+
+- Comes with a nice management web interface.
+- Supports multiple rss sources.
+- Supports multiple fileservers.
+- Supports streaming of sample videos to your clients.
+- Extracts screenshots from sample videos and displays them to your clients.
+
+## Screenshots
+
+![browse](screenshots/releases-browse.jpg)
+
+![details](screenshots/releases-details.jpg)
+
+## Requirements
+
+- **a server with docker installed.** See [server requirements](#server-requirements) for more information.
+- **a source torrent tracker that provides a rss feed**
+- **rtorrent + ruTorrent seedbox with the [atus-rutorrent-api](https://github.com/SteffenLoges/atus-rutorrent-api) plugin installed**
+- **your own tracker for uploads with the [atus-tracker-api](https://github.com/SteffenLoges/atus-tracker-api) installed and configured**
+
+### Server Requirements
+
+ATUS itself is a lightweight application but if you want to make use of the sample video streaming feature, the server will have to transcode the sample videos.<br>
+I've tested this on a Hetzner CPX11 cloud server with 2 vcores and 2GB of RAM and it worked fine but depending on amount of releases you want to process, you might need more resources.<br>
+You can use my [referral link](https://hetzner.cloud/?ref=WHPxNsOJ8EEC) to get a free €20 credit.
+
+## Installation
+
+To deploy this project run
+
+```bash
+  docker run -d --name atus \
+    -v /home/atus_data:/app/atus_data \
+    -p 8000:8000 \
+    -d steffenloges/atus:latest
+```
+
+### or build your own image
+
+Clone the project
+
+```bash
+  git clone https://github.com/SteffenLoges/atus.git
+```
+
+Build the image
+
+```bash
+  docker build -t atus .
+```
+
+Run with
+
+```bash
+  docker run -d --name atus \
+    -v /home/atus_data:/app/atus_data \
+    -p 8000:8000
+```
+
+## Configuration
+
+Once the container is running, open http://[YOUR-SERVER-IP]:8000 in your browser.
+
+You will be prompted to create an account and set up your settings.
+
+You should start by configuring the upload settings as this is by far the hardest part.<br>
+Make sure to test if your settings are working by clicking "Upload Test Release".<br>
+**Do not proceed until the test release has been uploaded successfully.**
+
+Once this is done, you can proceed to set up fileservers and lastly rss sources. The web interface will guide you through the process.
+
+## Notes
+
+ATUS relies on [predb.ovh](https://predb.ovh/) ([GitHub](https://github.com/predbdotovh)) to determine if a release is a scene release or not.
+
+## Known Issues
+
+- ATUS will never delete releases and related files on its own even if you delete them from the fileserver / tracker. <br>
+  _An api endpoint to delete releases is planned but currently not possible due to the way [atus-tracker-api](https://github.com/SteffenLoges/atus-tracker-api)'s authentication is implemented._
+- If you delete a release from the fileserver while its downloading, it will be stuck in the "Downloading" state forever and ATUS will keep spamming the fileserver with status requests. To fix this, manually delete the release from ATUS through the web interface.
+
+## Tech Stack
+
+**Frontend:** Vue 3, Vuetify 3
+
+**Backend:** Go
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)

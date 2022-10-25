@@ -1,0 +1,5 @@
+@use "vuetify/styles/settings/colors" as colors;
+@use "vuetify/styles/settings/variables" as vvariables;
+
+$accent-color: lighten(#1c212e, 3%) !default;
+$accent-outline-color: darken($accent-color, 4%);
