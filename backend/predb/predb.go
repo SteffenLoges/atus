@@ -14,7 +14,7 @@ type Pre struct {
 // predb.ovh allows for a maximum of 30 requests per minute
 // so we keep track of the last request time and sleep if necessary
 var lastRequest time.Time
-var waitTimeBetweenRequests time.Duration = time.Second * 2
+var waitTimeBetweenRequests time.Duration = time.Second * 3
 
 func GetRelease(ctx context.Context, rlsName string) (*Pre, error) {
 
