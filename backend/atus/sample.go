@@ -6,6 +6,7 @@ import (
 	"atus/backend/release"
 	"atus/backend/video"
 	"fmt"
+	"os"
 	"path"
 	"time"
 )
@@ -75,9 +76,23 @@ func (a *ATUS) onNewSample(r *Release) error {
 
 			ts := screenInterval * i
 			newFileName := fmt.Sprintf("sample-screenshot-%ds-%d.jpg", ts, m.Index)
-			err := v.ExtractFrame(fmt.Sprintf("%d", ts), path.Join(config.Base.Folders.Data, m.ReleaseUID, newFileName))
+			savePath := path.Join(config.Base.Folders.Data, m.ReleaseUID, newFileName)
+			err := v.ExtractFrame(fmt.Sprintf("%d", ts), savePath)
 			if err != nil {
 				return err
+			}
+
+			// BugFix: ffmpeg sometimes creates a 0 byte file
+			// if this happens, skip this screenshot
+			fileInfo, err := os.Stat(savePath)
+			if err != nil {
+				logWithRef.Errorf("error getting file info for %s: %v", newFileName, err)
+				continue
+			}
+
+			if fileInfo.Size() == 0 {
+				logWithRef.Errorf("file %s is 0 bytes, skipping", newFileName)
+				continue
 			}
 
 			smv := release.NewMetaFile(m.ReleaseUID, newFileName, -1, release.MetafileTypeScreenImageFromSample, release.MetafileStateProcessed, nil, release.MetaInfo{
