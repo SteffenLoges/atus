@@ -93,12 +93,12 @@ ATUS relies on [predb.ovh](https://predb.ovh/) ([GitHub](https://github.com/pred
 
 - **meta file _xxx_ is not processed**<br>
   This usually means that ATUS is already processing another release and can't process the new one until the other one is finished. Just waiting a few minutes should fix this. If this happens frequently, your server might not have enough resources to process all releases in time. <br>
-  *In some cases, this error can also be caused if the fileserver is down, the file was deleted or your webserver has no read access to the file.*
+  _In some cases, this error can also occur if the fileserver is unreachable, the file was deleted or your webserver has no read access to the file._
 
 - **This torrent is for registered users only** or similar errors while adding a source rss feed<br>
   The tracker requires authentication. If the tracker offers a way to costimize the rss feed, make sure to select something like "direkt download".
   If the tracker doesn't offer this, you can add the trackers cookies during the rss feed setup. You can find the cookies in your browser's developer tools.<br>
-  <img src="screenshots/source-add-with-cookies-example.jpg" height="100" />  <img src="screenshots/source-cookies-example.jpg" height="100" />
+  <img src="screenshots/source-add-with-cookies-example.jpg" height="100" /> <img src="screenshots/source-cookies-example.jpg" height="100" />
 
 ## Tech Stack
 
