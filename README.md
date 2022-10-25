@@ -92,7 +92,8 @@ ATUS relies on [predb.ovh](https://predb.ovh/) ([GitHub](https://github.com/pred
 ## Common Errors
 
 - **meta file _xxx_ is not processed**<br>
-  ATUS can't download the meta file from the fileserver. This is either because the fileserver is down, the file was deleted or your webserver has no read access to the file.
+  This usually means that ATUS is already processing another release and can't process the new one until the other one is finished. Just waiting a few minutes should fix this. If this happens frequently, your server might not have enough resources to process all releases in time. <br>
+  *In some cases, this error can also be caused if the fileserver is down, the file was deleted or your webserver has no read access to the file.*
 
 - **This torrent is for registered users only** or similar errors while adding a source rss feed<br>
   The tracker requires authentication. If the tracker offers a way to costimize the rss feed, make sure to select something like "direkt download".
