@@ -40,6 +40,8 @@ func (v *ProbedVideo) Prepare() (*PreparedVideo, error) {
 		tempDir: tempDir,
 	}
 
+	videoStreamExtracted := false
+	audioStreamExtracted := false
 	for _, stream := range v.ProbeData.Streams {
 
 		var newFileName string
@@ -53,13 +55,20 @@ func (v *ProbedVideo) Prepare() (*PreparedVideo, error) {
 
 		res, err := v.Extract(stream, path.Join(tempDir, newFileName))
 		logger.Debugf("Extracting stream %d(%s), file: %s; %s", stream.Index, stream.CodecType, newFileName, res)
-		if err != nil {
-			// ignore subtitle errors (e.g. Error initializing output stream 0:0 -- Subtitle encoding currently only possible from text to text or bitmap to bitmap)
-			if stream.CodecType == "subtitle" {
-				continue
-			}
 
-			return nil, err
+		// we ignore errors here and check later if we have at least one video and one audio stream
+		// !! this means it is possible that we have missing streams in the output !!
+		if err != nil {
+			logger.Errorf("Error extracting stream %d(%s), file: %s; %s", stream.Index, stream.CodecType, newFileName, err)
+			continue
+		}
+
+		if stream.CodecType == "video" {
+			videoStreamExtracted = true
+		}
+
+		if stream.CodecType == "audio" {
+			audioStreamExtracted = true
 		}
 
 		p.PreparedStreams = append(p.PreparedStreams, &PreparedStream{
@@ -67,6 +76,15 @@ func (v *ProbedVideo) Prepare() (*PreparedVideo, error) {
 			Stream:   stream,
 		})
 
+	}
+
+	// make sure we have at least one video and one audio stream
+	if !videoStreamExtracted {
+		return nil, fmt.Errorf("no valid video stream found")
+	}
+
+	if !audioStreamExtracted {
+		return nil, fmt.Errorf("no valid audio stream found")
 	}
 
 	return p, nil

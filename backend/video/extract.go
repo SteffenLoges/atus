@@ -2,12 +2,21 @@ package video
 
 import (
 	"fmt"
+	"strings"
 )
 
 func (v *ProbedVideo) Extract(s *Stream, newFile string) ([]byte, error) {
 
 	switch s.CodecType {
 	case "video":
+		lowerCodecLongName := strings.ToLower(s.CodecLongName)
+
+		// videos can contain image streams that have codecType "video"
+		// we need to exclude those
+		if strings.Contains(lowerCodecLongName, "image") || strings.Contains(lowerCodecLongName, "png") {
+			return nil, fmt.Errorf("stream %s not supported", s.CodecLongName)
+		}
+
 		// extract video and convert to x264
 		return _exec("ffmpeg", "-y", "-hide_banner", "-loglevel", "warning", "-i", v.File, "-c:v", "libx264", "-vsync", "2", "-an", "-map", fmt.Sprintf("0:%d", s.Index), newFile)
 
