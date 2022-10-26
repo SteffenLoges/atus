@@ -9,7 +9,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"mime/multipart"
 	"strings"
 	"time"
@@ -167,7 +167,7 @@ func (d *Destination) UploadRelease(ctx context.Context, r *Release, torrent, nf
 	defer resp.Body.Close()
 
 	//  read body
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read response body: %s", err.Error())
 	}

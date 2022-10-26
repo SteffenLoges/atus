@@ -36,10 +36,6 @@ func New() (*ATUS, error) {
 
 	// -- check dependencies (ffmpeg, ffprobe, mp4dash)
 	if err := video.CheckDependencies(); err != nil {
-
-		fmt.Println(err.Error())
-		time.Sleep(time.Hour)
-
 		return nil, err
 	}
 
