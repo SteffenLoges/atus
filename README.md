@@ -7,6 +7,11 @@
 
 Automatically downloads scene-releases from rss feeds and uploads them to your own tracker.
 
+## Related Repos
+
+- [atus-rutorrent-api](https://github.com/SteffenLoges/atus-rutorrent-api)
+- [atus-tracker-api](https://github.com/SteffenLoges/atus-tracker-api)
+
 ## Features
 
 - Comes with a nice management web interface.
