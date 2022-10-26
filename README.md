@@ -47,7 +47,7 @@ To deploy this project run
   docker run -d --name atus \
     -v /home/atus_data:/app/atus_data \
     -p 8000:8000 \
-    -d steffenloges/atus:latest
+    -d ghcr.io/steffenloges/atus:latest
 ```
 
 ### or build your own image
