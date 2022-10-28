@@ -88,7 +88,7 @@ export function connect({
       }
 
       if (handlers.length === 0) {
-        throw new Error(
+        console.warn(
           `websocket: no handler for event: ${event}`
         );
       }
