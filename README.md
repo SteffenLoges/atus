@@ -1,9 +1,19 @@
+
+# predb.ovh is currently offline (January 8, 2023)
+
+predb.ovh is currently offline. This means that ***ATUS is currently unusable*** until thier api is back up again or i find a different predb with free api-access.
+
+If you know of one, gladly let me know or check for status updates on their [github](https://github.com/predbdotovh).
+
+#
+
 <p align="center">
   <img src="frontend/src/assets/images/logo-big.png" width="170" /><br>
   <img src="frontend/src/assets/images/logo-text.png" />
 </p>
 
 <h2 align="center">ATUS - Automatic Torrent Upload Script</h2>
+
 
 Automatically downloads scene-releases from rss feeds and uploads them to your own tracker.
 
