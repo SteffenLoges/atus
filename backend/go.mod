@@ -17,7 +17,7 @@ require (
 	github.com/zeebo/bencode v1.0.0
 	golang.org/x/crypto v0.0.0-20220926161630-eccd6366d1be
 	golang.org/x/image v0.0.0-20220902085622-e7cb96979f69
-	golang.org/x/text v0.3.8
+	golang.org/x/text v0.7.0
 )
 
 require (
@@ -25,6 +25,6 @@ require (
 	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/mattn/go-colorable v0.1.9 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
-	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
-	golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f // indirect
+	golang.org/x/net v0.7.0 // indirect
+	golang.org/x/sys v0.5.0 // indirect
 )
